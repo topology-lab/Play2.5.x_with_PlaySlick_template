@@ -9,5 +9,6 @@ target
 
 bin
 .settings
-/.cache*
+/.cache-main
+/.cache-tests
 /.history
