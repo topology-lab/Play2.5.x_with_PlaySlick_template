@@ -1,1 +1,1 @@
-web: target/start -Ddb.default.driver=org.postgresql.Driver -Ddb.default.url=${DATABASE_URL} -Dhttp.port=${PORT} -DapplyEvolutions.default=true
+web: target/universal/stage/bin/nanicolle -Ddb.default.driver=org.postgresql.Driver -Ddb.default.url=${DATABASE_URL} -Dhttp.port=${PORT} -DapplyEvolutions.default=true
