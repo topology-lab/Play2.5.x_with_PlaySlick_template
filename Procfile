@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/nanicolle -Ddb.default.driver=org.postgresql.Driver -Ddb.default.url=${DATABASE_URL} -Dhttp.port=${PORT} -DapplyEvolutions.default=false
+web: target/universal/stage/bin/nanicolle -Dplay.crypto.secret=${APPLICATION_SECRET} -Ddb.default.driver=org.postgresql.Driver -Ddb.default.url=${DATABASE_URL} -Dhttp.port=${PORT} -DapplyEvolutions.default=false
