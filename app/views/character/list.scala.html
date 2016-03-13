@@ -1,0 +1,33 @@
+@(characters: Seq[models.Tables.CharactersRow])
+
+@main("ユーザ一覧") {
+
+<div>
+  <a href="@routes.CCharacter.edit()" class="btn btn-success" role="button">新規作成</a>
+</div>
+
+<div class="col-xs-6">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>名前</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+    @characters.map { character =>
+      <tr>
+        <td>@character.characterId</td>
+        <td><a href="@routes.CCharacter.edit(Some(character.characterId))">@character.name</a></td>
+        <td>@helper.form(routes.CCharacter.remove(character.characterId)){
+          <input type="submit" value="削除" class="btn btn-danger btn-xs"/>
+        }
+        </td>
+      </tr>
+    }
+    </tbody>
+  </table>
+</div>
+
+}

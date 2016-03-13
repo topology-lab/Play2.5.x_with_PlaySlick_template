@@ -7,6 +7,7 @@ import play.api.i18n.I18nSupport
 import play.api.i18n.MessagesApi
 import play.api.mvc.Controller
 import slick.driver.JdbcProfile
+import models.Tables.Characters
 
 class CCharacter @Inject()(val dbConfigProvider: DatabaseConfigProvider,
 		val messagesApi: MessagesApi) extends Controller
@@ -15,12 +16,12 @@ class CCharacter @Inject()(val dbConfigProvider: DatabaseConfigProvider,
 	/**
 	 * 一覧表示
 	 */
-	 def list = TODO
+	def list = TODO
 
 	 /**
 	  * 編集画面表示
 	  */
-	 def edit(character_id: Option[Long]) = TODO
+	 def edit(character_id: Option[Int]) = TODO
 
 	 /**
 	  * 登録実行
@@ -35,5 +36,5 @@ class CCharacter @Inject()(val dbConfigProvider: DatabaseConfigProvider,
 	 /**
 	  * 削除実行
 	  */
-	 def remove(character_id: Long) = TODO
+	 def remove(character_id: Int) = TODO
 }

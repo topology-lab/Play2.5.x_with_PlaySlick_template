@@ -15,7 +15,14 @@ libraryDependencies ++= Seq(
   evolutions,
   "com.typesafe.play" %% "play-slick" % "1.1.1",
   "com.typesafe.play" %% "play-slick-evolutions" % "1.1.1",
-  "org.postgresql"  %  "postgresql"  %  "9.4.1208.jre7"
+//  "com.typesafe.play" %% "play-slick" % "3.1.0",
+//  "com.typesafe.play" %% "play-slick-evolutions" % "3.1.0",
+  "com.typesafe.slick" % "slick-codegen_2.11" % "3.1.0-M2",
+  "com.typesafe" % "config" % "1.3.0",
+
+  "com.jsuereth" %% "scala-arm" % "1.4",
+
+  "org.postgresql"  %  "postgresql"  %  "9.4-1201-jdbc41"
 )
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
