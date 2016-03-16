@@ -15,9 +15,7 @@ libraryDependencies ++= Seq(
   evolutions,
   "com.typesafe.play" %% "play-slick" % "1.1.1",
   "com.typesafe.play" %% "play-slick-evolutions" % "1.1.1",
-//  "com.typesafe.play" %% "play-slick" % "3.1.0",
-//  "com.typesafe.play" %% "play-slick-evolutions" % "3.1.0",
-  "com.typesafe.slick" % "slick-codegen_2.11" % "3.1.0-M2",
+  "com.typesafe.slick" % "slick-codegen_2.11" % "3.1.1",
   "com.typesafe" % "config" % "1.3.0",
 
   "com.jsuereth" %% "scala-arm" % "1.4",
@@ -28,3 +26,31 @@ libraryDependencies ++= Seq(
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 
 EclipseKeys.preTasks := Seq(compile in Compile)
+
+// Slick code generator
+import com.typesafe.config.ConfigFactory
+
+slickCodeGen <<= slickCodeGenTask // register sbt command
+//(compile in Compile) <<= (compile in Compile) dependsOn (slickCodeGenTask) // register automatic code generation on compile
+lazy val config = ConfigFactory.parseFile(new File("./conf/application.conf"))
+lazy val slickCodeGen = taskKey[Seq[File]]("slick-codegen")
+lazy val slickCodeGenTask = (sourceManaged, dependencyClasspath in Compile, runner in Compile, streams) map { (dir, cp, r, s) =>
+  val slickDriver = config.getString("slick.dbs.default.driver").init
+  val jdbcDriver = config.getString("slick.dbs.default.db.driver")
+  val url = config.getString("slick.dbs.default.db.url")
+  val outputDir = "app/"
+  val pkg = "models"
+  val username = config.getString("slick.dbs.default.db.user")
+  val password = config.getString("slick.dbs.default.db.password")
+
+  toError(
+    r.run(
+      "slick.codegen.SourceCodeGenerator",
+      cp.files,
+      Array(slickDriver, jdbcDriver, url, outputDir, pkg, username, password),
+      s.log
+    )
+  )
+  val fname = outputDir + "/Tables.scala"
+  Seq(file(fname))
+}

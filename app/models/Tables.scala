@@ -19,7 +19,7 @@ trait Tables {
   def ddl = schema
 
   /** Entity class storing rows of table Characters
-   *  @param characterId Database column character_id SqlType(serial), AutoInc, PrimaryKey
+   *  @param characterId Database column character_id SqlType(int4), PrimaryKey
    *  @param name Database column name SqlType(bpchar), Length(32,false)
    *  @param feature Database column feature SqlType(varchar) */
   case class CharactersRow(characterId: Int, name: String, feature: String)
@@ -34,8 +34,8 @@ trait Tables {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(characterId), Rep.Some(name), Rep.Some(feature)).shaped.<>({r=>import r._; _1.map(_=> CharactersRow.tupled((_1.get, _2.get, _3.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column character_id SqlType(serial), AutoInc, PrimaryKey */
-    val characterId: Rep[Int] = column[Int]("character_id", O.AutoInc, O.PrimaryKey)
+    /** Database column character_id SqlType(int4), PrimaryKey */
+    val characterId: Rep[Int] = column[Int]("character_id", O.PrimaryKey)
     /** Database column name SqlType(bpchar), Length(32,false) */
     val name: Rep[String] = column[String]("name", O.Length(32,varying=false))
     /** Database column feature SqlType(varchar) */

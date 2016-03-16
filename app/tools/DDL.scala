@@ -7,7 +7,6 @@ import play.api.mvc.Controller
 
 class DDL @Inject() extends Controller {
 
-//	@SuppressWarnings("deprecation")
 	def gen = Action {
 		Tables.ddl.createStatements.foreach(println)
 		Ok(views.html.index("Your new application is ready."))
