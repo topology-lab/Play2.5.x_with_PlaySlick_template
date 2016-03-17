@@ -14,6 +14,13 @@ PostgreSQL 9.4
 ## Site
 [nanicolle](http://nanicolle.herokuapp.com/)
 
+## Installation
+
+    $ git clone https://github.com/topology-lab/nanicolle
+
+- modify "conf/application.conf"  
+TODO
+
 ## Contribution
 pull request for me.
 
