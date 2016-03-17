@@ -29,12 +29,12 @@ class CCharacter @Inject() (
 	/**
 	 * 一覧表示
 	 */
-	def list = //TODO
-		Action.async { implicit request =>
-			val query = Tables.Users.map(_.userId)
-			val resultingUsers = dbConfig.db.run(query.result)
-			resultingUsers.map(user => Ok(views.html.index(user.toString)))
-		}
+	def list = Action.async { implicit request =>
+		val query = Tables.Users.map(_.userId)
+		val resultingUsers = dbConfig.db.run(query.result)
+		resultingUsers.map(user => Ok(views.html.index(user.toString)))
+	}
+
 	/**
 	 * 編集画面表示
 	 */
